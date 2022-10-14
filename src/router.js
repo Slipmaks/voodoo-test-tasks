@@ -7,6 +7,7 @@ const routes = [
     name: "FirstTask",
     component: FirstTask,
   },
+
   {
     path: "/second-task",
     name: "SecondTask",

@@ -5,10 +5,16 @@
     <RouterLink to="/second-task">Second task</RouterLink>
   </div>
 
-  <RouterView></RouterView>
+  <div class="wrapper">
+    <RouterView></RouterView>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.wrapper {
+  @apply px-3;
+}
+</style>
 
 <script setup>
 import TheHeader from "./components/TheHeader.vue";

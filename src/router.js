@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
-import FirstTask from "./components/pages/FirstTask.vue";
-import SecondTask from "./components/pages/SecondTask.vue";
+import FirstTask from "./components/pages/first/FirstTask.vue";
+import SecondTask from "./components/pages/second/SecondTask.vue";
+import ThirdTask from "./components/pages/third/ThirdTask.vue";
+import FourthTask from "./components/pages/fourth/FourthTask.vue";
 const routes = [
   {
     path: "/",
@@ -12,6 +14,16 @@ const routes = [
     path: "/second-task",
     name: "SecondTask",
     component: SecondTask,
+  },
+  {
+    path: "/third-task",
+    name: "ThirdTask",
+    component: ThirdTask,
+  },
+  {
+    path: "/fourth-task",
+    name: "FourthTask",
+    component: FourthTask,
   },
 ];
 const router = createRouter({ history: createWebHistory(), routes });

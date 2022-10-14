@@ -1,11 +1,9 @@
 <template>
   <div>
     <h2>First task</h2>
-    <div class="flex items-start justify-end">
-      <pre
-        class="max-w-lg border whitespace-pre-wrap text-xs p-2"
-        :class="[isHide ? 'hidden-text' : 'show-text']"
-      >
+    <ShowTaskButton>
+      <template v-slot:text>
+        <pre>
 Description: 
 Need to create Section with card grid. 
 Section will have N items (can be added in customise 1-8 blocks.) 
@@ -30,28 +28,14 @@ Section will have N items (can be added in customise 1-8 blocks.)
     -Color
     -Overlay opacity
 If there are 2+ blocks need to align correctly https://prnt.sc/OnZMjE6tCr0s</pre
-      >
-      <button class="border border-slate-500 p-2" @click="switchHidden">
-        Show task text
-      </button>
-    </div>
+        >
+      </template>
+    </ShowTaskButton>
   </div>
 </template>
-<script setup>
-import { ref } from "vue";
 
-const isHide = ref(true);
-const switchHidden = () => {
-  isHide.value = !isHide.value;
-  console.log(isHide.value);
-};
+<script setup>
+import ShowTaskButton from "../../ShowTaskButton.vue";
 </script>
 
-<style>
-.hidden-text {
-  @apply hidden transition-all opacity-0 mt-0;
-}
-.show-text {
-  @apply transition-all opacity-100 mt-11;
-}
-</style>
+<style></style>

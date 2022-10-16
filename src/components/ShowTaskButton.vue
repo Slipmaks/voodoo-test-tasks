@@ -11,18 +11,21 @@
       class="transition-all border border-black text-black p-2 hover:bg-black hover:text-white"
       @click="switchHidden"
     >
-      Show task text
+      {{ showHideText }} task text
     </button>
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
-const isHide = ref(true);
+const isHide = ref(false);
 const switchHidden = () => {
   isHide.value = !isHide.value;
   console.log(isHide.value);
 };
+const showHideText = computed(() => {
+  return isHide.value ? "Show" : "Hide";
+});
 </script>
 
 <style scoped>

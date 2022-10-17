@@ -1,33 +1,44 @@
 <template>
   <div class="wrapper">
     <div class="section">
-      <h2
-        @click="editTitle(true)"
-        v-if="!showTitleInput"
-        :style="{
-          'font-size': sectionTitleSize + 'px',
-          color: sectionTitleColor,
-        }"
-      >
-        {{ title }}
-      </h2>
-      <input
-        type="text"
-        ref="titleInput"
-        v-if="showTitleInput"
-        @keydown.enter="setTitle"
-        @blur="editTitle(false)"
-      />
-      <p @click="editDescription(true)" v-if="!showDescriptionInput">
-        {{ description }}
-      </p>
-      <input
-        type="text"
-        ref="descriptionInput"
-        v-if="showDescriptionInput"
-        @keydown.enter="setDescription"
-        @blur="editDescription(false)"
-      />
+      <div class="flex items-center flex-col">
+        <h2
+          @click="editTitle(true)"
+          v-if="!showTitleInput"
+          :style="{
+            'font-size': sectionTitleSize + 'px',
+            color: sectionTitleColor,
+          }"
+        >
+          {{ title }}
+        </h2>
+        <input
+          type="text"
+          ref="titleInput"
+          v-if="showTitleInput"
+          @keydown.enter="setTitle"
+          @blur="editTitle(false)"
+        />
+        <p
+          @click="editDescription(true)"
+          v-if="!showDescriptionInput"
+          :style="{ color: sectionDescriptionColor }"
+        >
+          {{ description }}
+        </p>
+        <input
+          type="text"
+          ref="descriptionInput"
+          v-if="showDescriptionInput"
+          @keydown.enter="setDescription"
+          @blur="editDescription(false)"
+        />
+      </div>
+      <div class="flex gap-5 flex-wrap justify-center items-center">
+        <div v-for="item in 10" :key="item" class="flex">
+          <div class="block"></div>
+        </div>
+      </div>
     </div>
     <div class="global-settings">
       <div>
@@ -48,7 +59,7 @@
       </div>
       <div>
         <p>Section description color</p>
-        <input type="text" />
+        <input type="text" v-model="sectionDescriptionColor" />
       </div>
       <div>
         <p>Display as slider</p>
@@ -67,7 +78,8 @@ const descriptionInput = ref(null);
 const showTitleInput = ref(false);
 const showDescriptionInput = ref(false);
 const sectionTitleSize = ref("16");
-const sectionTitleColor = ref("#fff");
+const sectionTitleColor = ref("black");
+const sectionDescriptionColor = ref("black");
 
 const editTitle = (val) => {
   showTitleInput.value = val;
@@ -93,5 +105,8 @@ const setDescription = () => {
 }
 .global-settings {
   @apply bg-slate-100 p-2;
+}
+.block {
+  @apply w-11 h-11 bg-slate-700;
 }
 </style>

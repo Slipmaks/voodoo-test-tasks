@@ -21,7 +21,6 @@ import { ref, computed } from "vue";
 const isHide = ref(false);
 const switchHidden = () => {
   isHide.value = !isHide.value;
-  console.log(isHide.value);
 };
 const showHideText = computed(() => {
   return isHide.value ? "Show" : "Hide";

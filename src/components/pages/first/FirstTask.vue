@@ -32,10 +32,14 @@ If there are 2+ blocks need to align correctly https://prnt.sc/OnZMjE6tCr0s</pre
       </template>
     </ShowTaskButton>
   </div>
+  <div>
+    <Section></Section>
+  </div>
 </template>
 
 <script setup>
 import ShowTaskButton from "../../ShowTaskButton.vue";
+import Section from "./Section.vue";
 </script>
 
 <style></style>

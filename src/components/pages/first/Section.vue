@@ -34,24 +34,26 @@
           @blur="editDescription(false)"
         />
       </div>
-      <div class="flex gap-5 flex-wrap justify-center items-center">
-        <div v-for="item in 10" :key="item" class="flex">
-          <div class="block"></div>
-        </div>
+      <div
+        class="flex flex-wrap justify-center items-center relative w-full"
+        :style="{ gap: blockGap + 'px' }"
+      >
+        <TheBlock v-for="item in itemsCount" :key="item" class="flex">
+        </TheBlock>
       </div>
     </div>
     <div class="global-settings">
       <div>
         <p>N items(between 1-8)</p>
-        <input type="number" min="1" max="8" />
+        <input type="number" min="1" max="8" v-model="itemsCount" />
       </div>
       <div>
         <p>Gap between blocks</p>
-        <input type="range" value="0" min="0" max="10" />
+        <input type="range" min="0" max="18" v-model="blockGap" />
       </div>
       <div>
         <p>Section title text size</p>
-        <input type="text" v-model="sectionTitleSize" />
+        <input type="number" v-model="sectionTitleSize" />
       </div>
       <div>
         <p>Section title color</p>
@@ -70,6 +72,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import TheBlock from "./TheBlock.vue";
 
 const title = ref("Edit title");
 const description = ref("Edit description");
@@ -80,6 +83,8 @@ const showDescriptionInput = ref(false);
 const sectionTitleSize = ref("16");
 const sectionTitleColor = ref("black");
 const sectionDescriptionColor = ref("black");
+const blockGap = ref(8);
+const itemsCount = ref(2);
 
 const editTitle = (val) => {
   showTitleInput.value = val;
@@ -105,8 +110,5 @@ const setDescription = () => {
 }
 .global-settings {
   @apply bg-slate-100 p-2;
-}
-.block {
-  @apply w-11 h-11 bg-slate-700;
 }
 </style>

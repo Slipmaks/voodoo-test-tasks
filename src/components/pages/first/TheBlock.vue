@@ -37,7 +37,13 @@
         <input type="color" v-model="color" />
       </div>
       <div>
-        <input type="file" ref="img" v-on:change="handleFileUpload()" />
+        <label for="upload-photo">Browse...</label>
+        <input
+          id="upload-photo"
+          type="file"
+          ref="img"
+          v-on:change="handleFileUpload()"
+        />
       </div>
     </div>
   </div>
@@ -65,5 +71,13 @@ const handleFileUpload = () => {
 <style scoped>
 select {
   background-color: transparent;
+}
+#upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+label {
+  cursor: pointer;
 }
 </style>

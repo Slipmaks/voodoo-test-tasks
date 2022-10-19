@@ -35,11 +35,22 @@
         />
       </div>
       <div
+        v-if="!asCarousel"
         class="flex flex-wrap justify-center items-center relative w-full"
         :style="{ gap: blockGap + 'px' }"
       >
-        <TheBlock v-for="item in itemsCount" :key="item" class="flex">
-        </TheBlock>
+        <TheBlock v-for="item in itemsCount" :key="item"></TheBlock>
+      </div>
+      <div v-if="asCarousel" class="w-full px-5">
+        <Carousel class="w-full" :settings="settings">
+          <Slide class="w-full" v-for="item in itemsCount" :key="item">
+            <TheBlock />
+          </Slide>
+          <template #addons>
+            <Pagination />
+            <Navigation />
+          </template>
+        </Carousel>
       </div>
     </div>
     <div class="global-settings">
@@ -65,14 +76,16 @@
       </div>
       <div>
         <p>Display as slider</p>
-        <input type="checkbox" />
+        <input type="checkbox" v-model="asCarousel" />
       </div>
     </div>
   </div>
 </template>
 <script setup>
+import "vue3-carousel/dist/carousel.css";
 import { ref } from "vue";
 import TheBlock from "./TheBlock.vue";
+import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
 
 const title = ref("Edit title");
 const description = ref("Edit description");
@@ -84,7 +97,13 @@ const sectionTitleSize = ref("16");
 const sectionTitleColor = ref("black");
 const sectionDescriptionColor = ref("black");
 const blockGap = ref(8);
-const itemsCount = ref(2);
+const itemsCount = ref(3);
+const asCarousel = ref(false);
+const settings = {
+  itemsToShow: 1,
+  wrapAround: true,
+  transition: 600,
+};
 
 const editTitle = (val) => {
   showTitleInput.value = val;

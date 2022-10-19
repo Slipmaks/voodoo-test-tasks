@@ -1,17 +1,18 @@
 <template>
   <div
-    class="items-end justify-center relative"
+    class="items-end justify-center relative overflow-hidden transition-all"
     :style="{
       height: height,
       width: blockWidth + '%',
       background: color,
     }"
+    @mouseenter="showPanel"
+    @mouseleave="hidePanel"
   >
-    <div v-if="src">
-      <img :src="src" alt="Image" />
-    </div>
-
-    <div class="flex justify-center flex-wrap gap-1 content-center z-10">
+    <div
+      class="flex justify-center flex-wrap gap-1 content-center z-20 absolute -bottom-96 transition-all"
+      :class="{ show: panelIsHiden }"
+    >
       <div class="flex flex-wrap content-center justify-center">
         <p class="mr-1">Block width:</p>
         <select v-model="blockWidth">
@@ -37,13 +38,15 @@
         <input type="color" v-model="color" />
       </div>
       <div>
-        <label for="upload-photo">Browse...</label>
-        <input
-          id="upload-photo"
-          type="file"
-          ref="img"
-          v-on:change="handleFileUpload()"
-        />
+        <label for="upload-photo"
+          >Browse...
+          <input
+            id="upload-photo"
+            type="file"
+            ref="imgInput"
+            v-on:change="handleFileUpload()"
+          />
+        </label>
       </div>
     </div>
   </div>
@@ -54,18 +57,23 @@ import { ref } from "vue";
 const blockWidth = ref(25);
 const height = ref("300px");
 const color = ref("#fafafa");
-const src = ref("");
-const img = ref(null);
+const src = ref(null);
+const imgInput = ref("");
+const panelIsHiden = ref(false);
 
 const handleFileUpload = () => {
   const reader = new FileReader();
 
   reader.addEventListener("load", () => {
     src.value = reader.result;
-    console.log(src.value);
-    debugger;
   });
-  reader.readAsDataURL(img.value.files[0]);
+  reader.readAsDataURL(imgInput.value.files[0]);
+};
+const showPanel = () => {
+  panelIsHiden.value = true;
+};
+const hidePanel = () => {
+  panelIsHiden.value = false;
 };
 </script>
 <style scoped>
@@ -79,5 +87,8 @@ select {
 }
 label {
   cursor: pointer;
+}
+.show {
+  @apply bottom-0;
 }
 </style>

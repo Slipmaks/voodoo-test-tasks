@@ -26,5 +26,4 @@ Example - https://rdnt.store/products/white-naked-bodysoul
 </template>
 <script setup>
 import ShowTaskButton from "../../ShowTaskButton.vue";
-import { Carousel, Slide } from "vue-carousel";
 </script>

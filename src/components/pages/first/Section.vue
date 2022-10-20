@@ -35,16 +35,29 @@
         />
       </div>
       <div
-        v-if="!asCarousel"
+        v-if="!asCarousel && store.theBlocks.length"
         class="flex flex-wrap justify-center items-center relative w-full"
         :style="{ gap: blockGap + 'px' }"
       >
-        <TheBlock v-for="item in itemsCount" :key="item"></TheBlock>
+        <!-- <TheBlock v-for="item in itemsCount" :key="item"></TheBlock> -->
+        <TheBlock
+          v-for="item in store.theBlocks"
+          :key="item.id"
+          :img="item.image"
+          :color="item.color"
+          :height="item.height"
+          :width="item.width"
+        ></TheBlock>
       </div>
-      <div v-if="asCarousel" class="w-full px-5">
+      <div v-if="asCarousel && store.theBlocks.length" class="w-full px-5">
         <Carousel class="w-full" :settings="settings">
-          <Slide class="w-full" v-for="item in itemsCount" :key="item">
-            <TheBlock />
+          <Slide class="w-full" v-for="item in store.theBlocks" :key="item.id">
+            <TheBlock
+              :img="item.image"
+              :color="item.color"
+              :height="item.height"
+              :width="item.width"
+            />
           </Slide>
           <template #addons>
             <Pagination />
@@ -57,6 +70,8 @@
       <div>
         <p>N items(between 1-8)</p>
         <input type="number" min="1" max="8" v-model="itemsCount" />
+        <button @click="displayBlock">+</button>
+        <button @click="hideBlock">-</button>
       </div>
       <div>
         <p>Gap between blocks</p>
@@ -86,6 +101,7 @@ import "vue3-carousel/dist/carousel.css";
 import { ref } from "vue";
 import TheBlock from "./TheBlock.vue";
 import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
+import { useStore } from "../../../store";
 
 const title = ref("Edit title");
 const description = ref("Edit description");
@@ -104,6 +120,7 @@ const settings = {
   wrapAround: true,
   transition: 600,
 };
+const store = useStore();
 
 const editTitle = (val) => {
   showTitleInput.value = val;
@@ -118,6 +135,12 @@ const editDescription = (val) => {
 const setDescription = () => {
   description.value = descriptionInput.value.value;
   showDescriptionInput.value = false;
+};
+const displayBlock = () => {
+  store.createBlock();
+};
+const hideBlock = () => {
+  store.deleteBlock();
 };
 </script>
 <style scoped>

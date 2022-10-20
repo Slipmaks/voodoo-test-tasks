@@ -3,11 +3,11 @@
     class="items-end justify-center relative overflow-hidden transition-all"
     :style="{
       height: height,
-      width: blockWidth + '%',
+      width: width + '%',
       background: color,
     }"
-    @mouseenter="showPanel"
-    @mouseleave="hidePanel"
+    @mouseenter="showPanel()"
+    @mouseleave="hidePanel()"
   >
     <div
       class="flex justify-center flex-wrap gap-1 content-center z-20 absolute -bottom-96 transition-all"
@@ -15,7 +15,7 @@
     >
       <div class="flex flex-wrap content-center justify-center">
         <p class="mr-1">Block width:</p>
-        <select v-model="blockWidth">
+        <select v-model="width">
           <option value="25">25%</option>
           <option value="50">50%</option>
           <option value="75">75%</option>
@@ -54,12 +54,11 @@
 <script setup>
 import { ref } from "vue";
 
-const blockWidth = ref(25);
-const height = ref("300px");
-const color = ref("#fafafa");
+defineProps(["img", "color", "height", "width"]);
+
 const src = ref(null);
 const imgInput = ref("");
-const panelIsHiden = ref(false);
+let panelIsHiden = ref(false);
 
 const handleFileUpload = () => {
   const reader = new FileReader();

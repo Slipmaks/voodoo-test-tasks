@@ -9,8 +9,18 @@
     @mouseenter="showPanel()"
     @mouseleave="hidePanel()"
   >
+    <div>
+      <img :src="imgProp" />
+      <div
+        class="overlay"
+        :style="{ background: overlayColor, opacity: opacityProp }"
+      >
+        hello
+      </div>
+    </div>
+
     <div
-      class="flex justify-center flex-wrap gap-1 content-center z-20 absolute -bottom-96 transition-all"
+      class="flex justify-center flex-wrap gap-1 content-center z-100 absolute -bottom-96 transition-all"
       :class="{ show: panelIsHiden }"
     >
       <div class="flex flex-wrap content-center justify-center">
@@ -33,7 +43,7 @@
         </select>
       </div>
 
-      <div class="flex">
+      <div class="flex" v-if="!imgProp">
         <p class="mr-1">Color:</p>
         <input
           type="color"
@@ -41,14 +51,31 @@
           @change="chngBlockColor($event)"
         />
       </div>
+      <div class="flex flex-col" v-if="imgProp">
+        <div>
+          <p>Overlay color:</p>
+          <input type="color" @change="chngOverlayColor($event)" />
+        </div>
+        <div>
+          <p>Overlay opacity</p>
+          <input
+            type="range"
+            min="10"
+            max="100"
+            @change="chngOverlayOpacity($event)"
+          />
+        </div>
+      </div>
+
       <div>
-        <label for="upload-photo"
+        <label :for="idProp + '-input'"
           >Browse...
           <input
-            id="upload-photo"
+            :id="idProp + '-input'"
+            class="upload-photo"
             type="file"
             ref="imgInput"
-            v-on:change="handleFileUpload()"
+            @change="handleFileUpload(idProp)"
           />
         </label>
       </div>
@@ -65,6 +92,8 @@ const props = defineProps([
   "colorProp",
   "heightProp",
   "widthProp",
+  "opacityProp",
+  "overlayColor",
 ]);
 props.colorProp;
 props.widthProp;
@@ -75,11 +104,13 @@ const src = ref(null);
 const imgInput = ref("");
 let panelIsHiden = ref(false);
 
-const handleFileUpload = () => {
+const handleFileUpload = (id) => {
   const reader = new FileReader();
 
   reader.addEventListener("load", () => {
     src.value = reader.result;
+
+    store.setImage(id, src.value);
   });
   reader.readAsDataURL(imgInput.value.files[0]);
 };
@@ -98,12 +129,18 @@ const chngBlockHeight = (event) => {
 const chngBlockColor = (event) => {
   store.changeColor(props.idProp, event.target.value);
 };
+const chngOverlayColor = (event) => {
+  store.changeOverlayColor(props.idProp, event.target.value);
+};
+const chngOverlayOpacity = (event) => {
+  store.changeOverlayOpacity(props.idProp, event.target.value / 100);
+};
 </script>
 <style scoped>
 select {
   background-color: transparent;
 }
-#upload-photo {
+.upload-photo {
   opacity: 0;
   position: absolute;
   z-index: -1;
@@ -113,5 +150,8 @@ label {
 }
 .show {
   @apply bottom-0;
+}
+.overlay {
+  @apply absolute w-full h-full top-0 left-0;
 }
 </style>

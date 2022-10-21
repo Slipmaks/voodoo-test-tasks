@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { suits } from "./dummy-code/suits";
 
 export const useStore = defineStore("main", {
   state: () => ({
@@ -13,7 +12,11 @@ export const useStore = defineStore("main", {
         width: "25",
         height: "300px",
         color: "#fafafa",
-        image: "",
+        image: {
+          url: "",
+          overlayColor: "#fafafa",
+          overlayOpacity: "0.1",
+        },
       };
       this.theBlocks.push(obj);
     },
@@ -28,6 +31,15 @@ export const useStore = defineStore("main", {
     },
     changeColor(id, val) {
       this.theBlocks[id].color = val;
+    },
+    setImage(id, val) {
+      this.theBlocks[id].image.url = val;
+    },
+    changeOverlayColor(id, val) {
+      this.theBlocks[id].image.overlayColor = val;
+    },
+    changeOverlayOpacity(id, val) {
+      this.theBlocks[id].image.overlayOpacity = val;
     },
   },
 });

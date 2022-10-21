@@ -18,6 +18,7 @@
           v-if="showTitleInput"
           @keydown.enter="setTitle"
           @blur="editTitle(false)"
+          v-focus
         />
         <p
           @click="editDescription(true)"
@@ -32,6 +33,7 @@
           v-if="showDescriptionInput"
           @keydown.enter="setDescription"
           @blur="editDescription(false)"
+          v-focus
         />
       </div>
       <div
@@ -43,10 +45,12 @@
           v-for="item in store.theBlocks"
           :key="item.id"
           :id-prop="item.id"
-          :img-prop="item.image"
+          :img-prop="item.image.url"
           :color-prop="item.color"
           :height-prop="item.height"
           :width-prop="item.width"
+          :opacity-prop="item.image.overlayOpacity"
+          :overlay-color="item.image.overlayColor"
         ></TheBlock>
       </div>
       <div v-if="asCarousel && store.theBlocks.length" class="w-full px-5">
@@ -54,10 +58,12 @@
           <Slide class="w-full" v-for="item in store.theBlocks" :key="item.id">
             <TheBlock
               :id-prop="item.id"
-              :img-prop="item.image"
+              :img-prop="item.image.url"
               :color-prop="item.color"
               :height-prop="item.height"
               :width-prop="item.width"
+              :opacity-prop="item.image.overlayOpacity"
+              :overlay-color="item.image.overlayColor"
             />
           </Slide>
           <template #addons>
@@ -69,10 +75,10 @@
     </div>
     <div class="global-settings">
       <div>
-        <p>N items(between 1-8)</p>
-        <input type="number" min="1" max="8" v-model="itemsCount" />
-        <button @click="displayBlock">+</button>
-        <button @click="hideBlock">-</button>
+        <p>{{ store.theBlocks.length }} items (between 1-8)</p>
+
+        <button class="btn" @click="displayBlock">Add item</button>
+        <button class="btn" @click="hideBlock">Delete item</button>
       </div>
       <div>
         <p>Gap between blocks</p>
@@ -114,7 +120,6 @@ const sectionTitleSize = ref("16");
 const sectionTitleColor = ref("black");
 const sectionDescriptionColor = ref("black");
 const blockGap = ref(8);
-const itemsCount = ref(3);
 const asCarousel = ref(false);
 const settings = {
   itemsToShow: 1,
@@ -122,7 +127,7 @@ const settings = {
   transition: 600,
 };
 const store = useStore();
-console.log(store.theBlocks);
+
 const editTitle = (val) => {
   showTitleInput.value = val;
 };
@@ -153,5 +158,8 @@ const hideBlock = () => {
 }
 .global-settings {
   @apply bg-slate-100 p-2;
+}
+.btn {
+  @apply transition-all bg-slate-200 p-1 mx-1 hover:bg-slate-50;
 }
 </style>

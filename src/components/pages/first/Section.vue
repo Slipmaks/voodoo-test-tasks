@@ -125,6 +125,8 @@ const settings = {
   itemsToShow: 1,
   wrapAround: true,
   transition: 600,
+  mouseDrag: false,
+  touchDrag: false,
 };
 const store = useStore();
 

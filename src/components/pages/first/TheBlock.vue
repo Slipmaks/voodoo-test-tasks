@@ -9,18 +9,17 @@
     @mouseenter="showPanel()"
     @mouseleave="hidePanel()"
   >
-    <div>
-      <img :src="imgProp" />
+    <div class="flex h-full">
+      <img :src="imgProp" class="self-center justify-self-center" />
+
       <div
         class="overlay"
         :style="{ background: overlayColor, opacity: opacityProp }"
-      >
-        hello
-      </div>
+      ></div>
     </div>
 
     <div
-      class="flex justify-center flex-wrap gap-1 content-center z-100 absolute -bottom-96 transition-all"
+      class="flex justify-center flex-wrap gap-2 content-center z-100 absolute -bottom-96 transition-all"
       :class="{ show: panelIsHiden }"
     >
       <div class="flex flex-wrap content-center justify-center">
@@ -43,7 +42,7 @@
         </select>
       </div>
 
-      <div class="flex" v-if="!imgProp">
+      <div class="flex justify-center items-center">
         <p class="mr-1">Color:</p>
         <input
           type="color"
@@ -51,12 +50,12 @@
           @change="chngBlockColor($event)"
         />
       </div>
-      <div class="flex flex-col" v-if="imgProp">
-        <div>
+      <div class="flex justify-center items-center" v-if="imgProp">
+        <div class="flex gap-1">
           <p>Overlay color:</p>
           <input type="color" @change="chngOverlayColor($event)" />
         </div>
-        <div>
+        <div class="flex flex-col justify-center items-center">
           <p>Overlay opacity</p>
           <input
             type="range"
@@ -67,7 +66,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="flex justify-center items-center">
         <label :for="idProp + '-input'"
           >Browse...
           <input

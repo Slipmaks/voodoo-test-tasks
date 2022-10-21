@@ -2,9 +2,9 @@
   <div
     class="items-end justify-center relative overflow-hidden transition-all"
     :style="{
-      height: height,
-      width: width + '%',
-      background: color,
+      height: heightProp,
+      width: widthProp + '%',
+      background: colorProp,
     }"
     @mouseenter="showPanel()"
     @mouseleave="hidePanel()"
@@ -15,7 +15,7 @@
     >
       <div class="flex flex-wrap content-center justify-center">
         <p class="mr-1">Block width:</p>
-        <select v-model="width">
+        <select @change="chngBlockWidth($event)">
           <option value="25">25%</option>
           <option value="50">50%</option>
           <option value="75">75%</option>
@@ -24,7 +24,7 @@
       </div>
       <div class="flex flex-wrap content-center justify-center">
         <p class="mr-1">Block height</p>
-        <select v-model="height">
+        <select @change="chngBlockHeight($event)">
           <option value="300px">300px</option>
           <option value="400px">400px</option>
           <option value="500px">500px</option>
@@ -35,7 +35,11 @@
 
       <div class="flex">
         <p class="mr-1">Color:</p>
-        <input type="color" v-model="color" />
+        <input
+          type="color"
+          value="colorProp"
+          @change="chngBlockColor($event)"
+        />
       </div>
       <div>
         <label for="upload-photo"
@@ -53,9 +57,20 @@
 </template>
 <script setup>
 import { ref } from "vue";
+import { useStore } from "../../../store";
 
-defineProps(["img", "color", "height", "width"]);
+const props = defineProps([
+  "idProp",
+  "imgProp",
+  "colorProp",
+  "heightProp",
+  "widthProp",
+]);
+props.colorProp;
+props.widthProp;
+props.heightProp;
 
+const store = useStore();
 const src = ref(null);
 const imgInput = ref("");
 let panelIsHiden = ref(false);
@@ -73,6 +88,15 @@ const showPanel = () => {
 };
 const hidePanel = () => {
   panelIsHiden.value = false;
+};
+const chngBlockWidth = (event) => {
+  store.changeWidth(props.idProp, event.target.value);
+};
+const chngBlockHeight = (event) => {
+  store.changeHeight(props.idProp, event.target.value);
+};
+const chngBlockColor = (event) => {
+  store.changeColor(props.idProp, event.target.value);
 };
 </script>
 <style scoped>

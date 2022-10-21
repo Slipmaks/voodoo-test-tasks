@@ -3,23 +3,15 @@ import { suits } from "./dummy-code/suits";
 
 export const useStore = defineStore("main", {
   state: () => ({
-    theBlocks: [
-      {
-        id: 1,
-        width: "300px",
-        height: "25",
-        color: "#fafafa",
-        image: "",
-      },
-    ],
+    theBlocks: [],
   }),
   getters: {},
   actions: {
     createBlock() {
       const obj = {
-        id: this.theBlocks.length + 1,
-        width: "300px",
-        height: "25",
+        id: this.theBlocks.length,
+        width: "25",
+        height: "300px",
         color: "#fafafa",
         image: "",
       };
@@ -27,6 +19,15 @@ export const useStore = defineStore("main", {
     },
     deleteBlock() {
       this.theBlocks.pop();
+    },
+    changeWidth(id, val) {
+      this.theBlocks[id].width = val;
+    },
+    changeHeight(id, val) {
+      this.theBlocks[id].height = val;
+    },
+    changeColor(id, val) {
+      this.theBlocks[id].color = val;
     },
   },
 });

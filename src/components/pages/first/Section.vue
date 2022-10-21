@@ -39,24 +39,25 @@
         class="flex flex-wrap justify-center items-center relative w-full"
         :style="{ gap: blockGap + 'px' }"
       >
-        <!-- <TheBlock v-for="item in itemsCount" :key="item"></TheBlock> -->
         <TheBlock
           v-for="item in store.theBlocks"
           :key="item.id"
-          :img="item.image"
-          :color="item.color"
-          :height="item.height"
-          :width="item.width"
+          :id-prop="item.id"
+          :img-prop="item.image"
+          :color-prop="item.color"
+          :height-prop="item.height"
+          :width-prop="item.width"
         ></TheBlock>
       </div>
       <div v-if="asCarousel && store.theBlocks.length" class="w-full px-5">
         <Carousel class="w-full" :settings="settings">
           <Slide class="w-full" v-for="item in store.theBlocks" :key="item.id">
             <TheBlock
-              :img="item.image"
-              :color="item.color"
-              :height="item.height"
-              :width="item.width"
+              :id-prop="item.id"
+              :img-prop="item.image"
+              :color-prop="item.color"
+              :height-prop="item.height"
+              :width-prop="item.width"
             />
           </Slide>
           <template #addons>
@@ -121,7 +122,7 @@ const settings = {
   transition: 600,
 };
 const store = useStore();
-
+console.log(store.theBlocks);
 const editTitle = (val) => {
   showTitleInput.value = val;
 };

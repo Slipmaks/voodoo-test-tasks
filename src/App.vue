@@ -16,6 +16,12 @@
 .wrapper {
   @apply px-3;
 }
+a {
+  @apply hover:border-b-2;
+}
+.router-link-exact-active {
+  @apply border-b-2;
+}
 </style>
 
 <script setup>

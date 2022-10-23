@@ -50,17 +50,21 @@
           @change="chngBlockColor($event)"
         />
       </div>
-      <div class="flex justify-center items-center" v-if="imgProp">
-        <div class="flex gap-1">
+      <div
+        class="flex justify-center items-center flex-wrap px-2 gap-2"
+        v-if="imgProp"
+      >
+        <div class="flex gap-2">
           <p>Overlay color:</p>
           <input type="color" @change="chngOverlayColor($event)" />
         </div>
-        <div class="flex flex-col justify-center items-center">
+        <div class="flex flex-col justify-center items-center flex-wrap">
           <p>Overlay opacity</p>
           <input
             type="range"
-            min="10"
+            min="0"
             max="100"
+            step="1"
             @change="chngOverlayOpacity($event)"
           />
         </div>

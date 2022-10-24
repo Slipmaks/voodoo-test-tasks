@@ -5,9 +5,10 @@
       <Item
         v-for="item in store.items"
         :key="item.id"
-        :item="item.id"
+        :item-id="item.id"
         :img="item.img"
         :title="item.title"
+        :message="item.message"
       />
     </div>
   </div>

@@ -5,18 +5,18 @@ export const useStore = defineStore("main", {
     theBlocks: [],
     items: [
       {
-        id: 1,
+        id: 0,
         img: "src/assets/ball.jpg",
         title: "Ball",
         message: "",
       },
       {
-        id: 2,
+        id: 1,
         img: "src/assets/drunk-roulette.jpg",
         title: "Drunk roulette",
         message: "",
       },
-      { id: 3, img: "src/assets/panel.jpg", title: "Panel", message: "" },
+      { id: 2, img: "src/assets/panel.jpg", title: "Panel", message: "" },
     ],
   }),
   getters: {},

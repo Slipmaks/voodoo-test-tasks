@@ -3,6 +3,21 @@ import { defineStore } from "pinia";
 export const useStore = defineStore("main", {
   state: () => ({
     theBlocks: [],
+    items: [
+      {
+        id: 1,
+        img: "src/assets/ball.jpg",
+        title: "Ball",
+        message: "",
+      },
+      {
+        id: 2,
+        img: "src/assets/drunk-roulette.jpg",
+        title: "Drunk roulette",
+        message: "",
+      },
+      { id: 3, img: "src/assets/panel.jpg", title: "Panel", message: "" },
+    ],
   }),
   getters: {},
   actions: {
@@ -40,6 +55,9 @@ export const useStore = defineStore("main", {
     },
     changeOverlayOpacity(id, val) {
       this.theBlocks[id].image.overlayOpacity = val;
+    },
+    changeMessage(id, val) {
+      this.items[id].message = val;
     },
   },
 });

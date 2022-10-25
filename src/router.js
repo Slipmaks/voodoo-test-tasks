@@ -3,6 +3,7 @@ import FirstTask from "./components/pages/first/FirstTask.vue";
 import SecondTask from "./components/pages/second/SecondTask.vue";
 import ThirdTask from "./components/pages/third/ThirdTask.vue";
 import FourthTask from "./components/pages/fourth/FourthTask.vue";
+
 const routes = [
   {
     path: "/",

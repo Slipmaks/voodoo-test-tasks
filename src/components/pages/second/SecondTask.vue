@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Second Task</h2>
     <ShowTaskButton>
       <template v-slot:text><Description /></template>
     </ShowTaskButton>

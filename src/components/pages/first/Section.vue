@@ -1,8 +1,9 @@
 <template>
   <div class="wrapper">
     <div class="section">
-      <div class="flex items-center flex-col">
+      <div class="flex items-center flex-col my-2">
         <h2
+          class="font-black"
           @click="editTitle(true)"
           v-if="!showTitleInput"
           :style="{
@@ -13,6 +14,7 @@
           {{ title }}
         </h2>
         <input
+          class="outline-none bg-slate-300"
           type="text"
           ref="titleInput"
           v-if="showTitleInput"
@@ -28,6 +30,7 @@
           {{ description }}
         </p>
         <input
+          class="outline-none bg-slate-300"
           type="text"
           ref="descriptionInput"
           v-if="showDescriptionInput"

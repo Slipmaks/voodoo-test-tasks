@@ -16,7 +16,19 @@ export const useStore = defineStore("main", {
         title: "Drunk roulette",
         message: "",
       },
-      { id: 2, img: "src/assets/panel.jpg", title: "Panel", message: "" },
+      {
+        id: 2,
+        img: "src/assets/panel.jpg",
+        title: "Panel",
+        message: "",
+      },
+    ],
+    cart: { items: [], deliveryDate: null },
+    wrappers: [
+      { id: 0, img: "src/assets/wrappers/image 1.png" },
+      { id: 1, img: "src/assets/wrappers/image 2.png" },
+      { id: 2, img: "src/assets/wrappers/image 3.png" },
+      { id: 3, img: "src/assets/wrappers/image 4.png" },
     ],
   }),
   getters: {},
@@ -58,6 +70,9 @@ export const useStore = defineStore("main", {
     },
     changeMessage(id, val) {
       this.items[id].message = val;
+    },
+    setDeliverydate(val) {
+      this.cart.deliveryDate = val;
     },
   },
 });

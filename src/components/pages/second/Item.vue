@@ -61,6 +61,5 @@ const addToCart = (id, img, title, message) => {
     wrapper: null,
   };
   store.cart.items.push(itemCart);
-  console.log(store.cart);
 };
 </script>

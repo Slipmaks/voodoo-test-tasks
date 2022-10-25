@@ -10,7 +10,7 @@
     @mouseleave="hidePanel()"
   >
     <div class="flex h-full">
-      <img :src="imgProp" class="self-center justify-self-center" />
+      <img :src="imgProp" class="self-center justify-self-center w-full" />
 
       <div
         class="overlay"

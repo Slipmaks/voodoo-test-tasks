@@ -3,40 +3,30 @@
     <div v-if="!storeStatus">
       <p>Cart empty</p>
     </div>
-    <div v-for="item in store.cart.items" :key="item.id" class="my-2">
+    <div v-for="item in store.cart.items" :key="item.id" class="my-2 relative">
+      <p
+        v-if="item.message"
+        class="absolute text-center ml-auto mr-auto left-0 right-0 top-3 font-semibold text-cyan-200"
+      >
+        {{ item.message }}
+      </p>
       <img :src="item.img" alt="img" />
       <p>Choose wrapper</p>
-      <div class="flex flex-wrap">
-        <div v-for="item in store.wrappers">
-          <div class="relative">
-            <img :src="item.img" class="w-12" />
-            <input
-              class="absolute top-0 left-0"
-              type="radio"
-              v-model="checkboxWrapper"
-              :value="item.id"
-            />
-          </div>
-        </div>
-        <!-- <Wrapper
-          v-for="item in store.wrappers"
-          :key="item.id"
-          :img="item.img"
-          :wrapper-id="item.id"
-          v-model="checkboxWrapper"
-        /> -->
+      <div>
+        <Wrapper :gift-id="item.id" />
       </div>
     </div>
-    <div>
+    <div v-if="storeStatus">
       <p>Delivery date:</p>
       <flatPickr
         v-model="date"
         :config="config"
         placeholder="Select date"
         @on-change="setDate"
-        class="outline-none bg-white bg-opacity-60 hover:bg-opacity-100 w-50"
+        class="outline-none bg-white bg-opacity-60 hover:bg-opacity-100 w-24 text-center"
       />
     </div>
+    <button v-if="store.cart.deliveryDate" @click="submit">Submit</button>
   </div>
 </template>
 
@@ -49,7 +39,6 @@ import Wrapper from "./Wrapper.vue";
 
 const store = useStore();
 const date = ref(null);
-const checkboxWrapper = ref(0);
 
 const config = {
   minDate: new Date().fp_incr(2),
@@ -68,4 +57,8 @@ const setDate = () => {
   console.log(store.cart);
 };
 const storeStatus = computed(() => store.cart.items.length);
+
+const submit = () => {
+  store.submit();
+};
 </script>

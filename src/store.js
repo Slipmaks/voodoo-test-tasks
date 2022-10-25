@@ -74,5 +74,12 @@ export const useStore = defineStore("main", {
     setDeliverydate(val) {
       this.cart.deliveryDate = val;
     },
+    setGiftWrapper(id, val) {
+      const item = this.cart.items.find((item) => item.id === id);
+      item.wrapper = val;
+    },
+    submit() {
+      alert("You order: " + this.cart.items.length + " items!");
+    },
   },
 });

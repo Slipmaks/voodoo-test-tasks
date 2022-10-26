@@ -10,6 +10,4 @@
 import ShowTaskButton from "../../ShowTaskButton.vue";
 import Description from "./Description.vue";
 import Section from "./Section.vue";
-
-import { ref } from "vue";
 </script>

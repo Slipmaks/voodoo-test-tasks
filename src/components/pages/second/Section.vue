@@ -11,7 +11,7 @@
       />
     </div>
     <img
-      src="src/assets/cart.svg"
+      src="/src/assets/cart.svg"
       alt="cart"
       class="w-8 absolute right-2 top-2 cursor-pointer"
       @click="cartHandler"

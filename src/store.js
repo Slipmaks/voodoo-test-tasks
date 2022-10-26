@@ -34,6 +34,9 @@ export const useStore = defineStore("main", {
   getters: {},
   actions: {
     createBlock() {
+      if (this.theBlocks.length >= 8) {
+        return;
+      }
       const obj = {
         id: this.theBlocks.length,
         width: "25",

@@ -89,15 +89,19 @@
       </div>
       <div>
         <p>Section title text size</p>
-        <input type="number" v-model="sectionTitleSize" />
+        <input type="number" v-model="sectionTitleSize" class="outline-none" />
       </div>
       <div>
         <p>Section title color</p>
-        <input type="text" v-model="sectionTitleColor" />
+        <input type="text" v-model="sectionTitleColor" class="outline-none" />
       </div>
       <div>
         <p>Section description color</p>
-        <input type="text" v-model="sectionDescriptionColor" />
+        <input
+          type="text"
+          v-model="sectionDescriptionColor"
+          class="outline-none"
+        />
       </div>
       <div>
         <p>Display as slider</p>
